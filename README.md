@@ -40,7 +40,7 @@ A través de esta plataforma, la ciudadanía puede hacer comentarios generales, 
 
 Los diputados analizarán los aportes. En la medida en se realicen cambios a la propuesta original se generarán nuevas versiones de la propuesta. Así, las y los usuarios cuyos aportes fueran incorporados, serán colaboradores en la redacción de la propuesta.
 
-Para más detalles sobre las funcionalidades básicas de esta plataforma descargue/consulte el(Manual de usuario)[https://leyesabiertas.hcdn.gob.ar/static/files/congreso_manual_de_usuario.pdf]
+Para más detalles sobre las funcionalidades básicas de esta plataforma descargue/consulte el Manual de usuario[https://leyesabiertas.hcdn.gob.ar/static/files/congreso_manual_de_usuario.pdf]
 
 ### Guía de instalación
 
