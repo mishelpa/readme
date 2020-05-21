@@ -10,8 +10,9 @@
 * [2. Descripción y contexto](#2-descripción-y-contexto)
 * [3. Guía de usuario](#3-guía-de-usuario)
 * [4. Guía de instalación](#4-guía-de-instalación)
-* [5. Autor](#5-Autor)
-* [6. Imagen del proyecto final](#6-imagen-del-proyecto-final)
+* [5. Autor](#5-autor)
+* [6. Versión](#6-versión)
+* [7. Licencia](#7-licencia)
 
 ***
 
