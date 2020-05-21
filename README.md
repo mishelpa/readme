@@ -162,7 +162,7 @@ Comando para ejecutar:
 dev/leyesabiertas-notifier:$ npm run dev
 ```
 
-### 4.2 Instalacion Docker
+### 4.2 Instalación Docker
 
 ```yml
 version: "3"
