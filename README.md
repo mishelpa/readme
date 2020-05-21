@@ -44,23 +44,192 @@ Para más detalles sobre las funcionalidades básicas de esta plataforma descarg
 
 ### Guía de instalación
 
----
+Hay dos formas de instalar leyes abiertas: Una es de forma clasica, descargando, haciendo setup y corriendo cada uno de los 3 repositorios en una terminal x/ repositorio.
 
-Paso a paso de cómo instalar la herramienta digital. En esta sección es recomendable explicar la arquitectura de carpetas y módulos que componen el sistema.
+La segunda forma es utilizando Docker y `docker-compose`. En solo un paso se instala y conectan todos. Si queres, podes explorar mas acerca de esta instalacion bajo el titulo "Instalacion (Docker)"
 
-Según el tipo de herramienta digital, el nivel de complejidad puede variar. En algunas ocasiones puede ser necesario instalar componentes que tienen dependencia con la herramienta digital. Si este es el caso, añade también la siguiente sección.
+#### Instalacion (Clasica)
 
-La guía de instalación debe contener de manera específica:
+> ⚠️ _IMPORTANTE:_ Es necesario que instales mongo 3.6 en tu computadora, con una base de datos llamada "leyesabiertas". No hace falta crear alguna collection, eso lo hace la app en inicio.
+> La instalacion requiere de instalar 3 repositorios, como minimo.
+> Para eso, ubicados en la carpeta donde les gustaria clonar los repos, supongamos una carpeta `/dev` hacen en la terminal:
 
-- Los requisitos del sistema operativo para la compilación (versiones específicas de librerías, software de gestión de paquetes y dependencias, SDKs y compiladores, etc.).
-- Las dependencias propias del proyecto, tanto externas como internas (orden de compilación de sub-módulos, configuración de ubicación de librerías dinámicas, etc.).
-- Pasos específicos para la compilación del código fuente y ejecución de tests unitarios en caso de que el proyecto disponga de ellos.
+```bash
+$ cd dev
+dev/:$ git clone https://github.com/DemocraciaEnRed/leyesabiertas-web
+dev/:$ git clone https://github.com/DemocraciaEnRed/leyesabiertas-core
+dev/:$ git clone https://github.com/DemocraciaEnRed/leyesabiertas-notifier
+```
 
-#### Dependencias
+Una vez hecho, hay que hacer un "Setup" de cada una de los repositorios que acabamos de clonar.
 
-Descripción de los recursos externos que generan una dependencia para la reutilización de la herramienta digital (librerías, frameworks, acceso a bases de datos y licencias de cada recurso). Es una buena práctica describir las últimas versiones en las que ha sido probada la herramienta digital.
+### Setup leyesabiertas-web
 
-    Puedes usar este estilo de letra diferenciar los comandos de instalación.
+Ir a la carpeta del repo y instalar las dependencias.
+
+```
+dev/:$ cd leyesabiertas-web
+dev/leyesabiertas-web:$ npm install
+```
+
+Ahora tenemos que crear un archivo `.env` que son nuestras variables de entorno
+
+```env
+API_URL=http://localhost:4000
+AUTH_SERVER_URL=https://keycloak.democraciaenred.org/auth
+REALM=leyes-abiertas
+RESOURCE=leyes-abiertas-web-dev
+SSL_REQUIRED=external
+PUBLIC_CLIENT=true
+CONFIDENTIAL_PORT=0
+```
+
+Comando para ejecutar:
+
+```
+dev/leyesabiertas-web:$ npm run dev
+```
+
+### Setup leyesabiertas-core
+
+Ir a la carpeta del repo y instalar las dependencias.
+
+```
+dev/:$ cd leyesabiertas-core
+dev/leyesabiertas-core:$ npm install
+```
+
+Ahora tenemos que crear un archivo `.env` que son nuestras variables de entorno
+
+```env
+PORT=4000
+SESSION_SECRET=faQ0hgRgLyahbQVsCrHkgg5ahJgoawdRKIPWB9H9
+MONGO_URL=mongodb://localhost/leyesabiertas
+AUTH_SERVER_URL=https://keycloak.democraciaenred.org/auth
+AUTH_REALM=leyes-abiertas
+AUTH_CLIENT=leyes-abiertas-core-dev
+NOTIFIER_URL=http://localhost:5000/api
+```
+
+Comando para ejecutar:
+
+```
+dev/leyesabiertas-core:$ npm run dev
+```
+
+### Setup leyesabiertas-notifier
+
+Ir a la carpeta del repo y instalar las dependencias.
+
+```
+dev/:$ cd leyesabiertas-notifier
+dev/leyesabiertas-web:$ npm install
+```
+
+Ahora tenemos que crear un archivo `.env` que son nuestras variables de entorno
+
+```env
+PORT=5000
+MONGO_URL=mongodb://localhost
+DB_COLLECTION=leyesabiertas
+ORGANIZATION_EMAIL=guillermo@democracyos.io
+ORGANIZATION_NAME='Portal de Leyes Abiertas'
+ORGANIZATION_URL=https://fake.org
+ORGANIZATION_API_URL=http://localhost:4000
+NODEMAILER_HOST=my.fake.smtp.io
+NODEMAILER_PASS=changeMe
+NODEMAILER_USER=changeMe
+NODEMAILER_PORT=25
+NODEMAILER_SECURE=true
+NODE_ENV=development
+BULK_EMAIL_CHUNK_SIZE=100
+```
+
+Comando para ejecutar:
+
+```
+dev/leyesabiertas-notifier:$ npm run dev
+```
+
+### Instalacion Docker
+
+```yml
+version: "3"
+services:
+  core:
+    image: democraciaenred/leyesabiertas-core:1.7.1
+    environment:
+      - PORT=3000
+      - SESSION_SECRET=faQ0hgRgLyahbQVsCrHkgg5ahJgoawdRKIPWB9H9
+      - MONGO_URL=mongodb://mongo/leyesabiertas
+      - AUTH_SERVER_URL=https://keycloak.democraciaenred.org/auth
+      - AUTH_REALM=leyes-abiertas
+      - AUTH_CLIENT=leyes-abiertas-core-dev
+      - NOTIFIER_URL=http://notifier:3000/api
+    ports:
+      - "4000:3000"
+    depends_on:
+      - mongo
+    tty: true
+  web:
+    image: democraciaenred/leyesabiertas-web:1.7.2
+    environment:
+      - API_URL=http://localhost:4000
+      - AUTH_SERVER_URL=https://keycloak.democraciaenred.org/auth
+      - REALM=leyes-abiertas
+      - RESOURCE=leyes-abiertas-web-dev
+      - SSL_REQUIRED=external
+      - PUBLIC_CLIENT=true
+      - CONFIDENTIAL_PORT=0
+    ports:
+      - "3000:3000"
+    depends_on:
+      - core
+    tty: true
+  notifier:
+    image: democraciaenred/leyesabiertas-notifier:1.7.3
+    environment:
+      - PORT=3000
+      - MONGO_URL=mongodb://mongo:27017
+      - DB_COLLECTION=leyesabiertas
+      - ORGANIZATION_EMAIL=guillermo@democracyos.io
+      - ORGANIZATION_NAME='Portal de Leyes Abiertas'
+      - ORGANIZATION_URL=https://fake.org
+      - ORGANIZATION_API_URL=http://core:3000
+      - NODEMAILER_HOST=my.fake.smtp.io
+      - NODEMAILER_PASS=changeMe
+      - NODEMAILER_USER=changeMe
+      - NODEMAILER_PORT=25
+      - NODEMAILER_SECURE=true
+      - NODE_ENV=development
+      - BULK_EMAIL_CHUNK_SIZE=100
+    ports:
+      - "5000:3000"
+    depends_on:
+      - core
+    tty: true
+  mongo:
+    image: mongo:3.6
+    ports:
+      - 32000:27017
+    volumes:
+      - ./mongo_db:/data/db
+```
+
+Una vez creado el archivo de docker-compose.yml, seguir las siguientes referencias de algunos comando utiles:
+
+```bash
+# Levantar servicios. Se puede detener si se hace Ctrl+C
+$ docker-compose up
+# Si los containers siguen corriendo y se quieren detener:
+$ docker-compose stop
+# Si se quiere eliminar solo los containers
+$ docker-compose rm
+# Si se quiere eliminar todo lo que el comando "up" inicializo (containers, volumenes, imagenes, etc)
+$ docker-compose down
+```
+
+### Dependencias
 
 - Librerias
 
@@ -100,11 +269,11 @@ El código de conducta establece las normas sociales, reglas y responsabilidades
 
 La plataforma Github premia y ayuda a los repositorios dispongan de este archivo. Al crear CODE_OF_CONDUCT.md puedes empezar desde una plantilla sugerida por ellos. Puedes leer más sobre cómo crear un archivo de Código de Conducta (aquí)[https://help.github.com/articles/adding-a-code-of-conduct-to-your-project/]
 
-### Autor/es
+### Autor
 
 ---
 
-Nombra a el/los autor/es original/es. Consulta con ellos antes de publicar un email o un nombre personal. Una manera muy común es dirigirlos a sus cuentas de redes sociales.
+Fundación Democracia en Red.
 
 ### Información adicional
 
@@ -116,18 +285,4 @@ Esta es la sección que permite agregar más información de contexto al proyect
 
 ---
 
-[LICENCIA](https://github.com/EL-BID/Plantilla-de-repositorio/blob/master/LICENSE.md)
-
-La licencia especifica los permisos y las condiciones de uso que el desarrollador otorga a otros desarrolladores que usen y/o modifiquen la herramienta digital.
-
-Incluye en esta sección una note con el tipo de licencia otorgado a esta herramienta digital. El texto de la licencia debe estar incluído en un archivo _LICENSE.md_ o _LICENSE.txt_ en la carpeta raíz.
-
-Si desconoces qué tipos de licencias existen y cuál es la mejor para cada caso, te recomendamos visitar la página https://choosealicense.com/.
-
-## Limitación de responsabilidades
-
-El BID no será responsable, bajo circunstancia alguna, de daño ni indemnización, moral o patrimonial; directo o indirecto; accesorio o especial; o por vía de consecuencia, previsto o imprevisto, que pudiese surgir:
-
-i. Bajo cualquier teoría de responsabilidad, ya sea por contrato, infracción de derechos de propiedad intelectual, negligencia o bajo cualquier otra teoría; y/o
-
-ii. A raíz del uso de la Herramienta Digital, incluyendo, pero sin limitación de potenciales defectos en la Herramienta Digital, o la pérdida o inexactitud de los datos de cualquier tipo. Lo anterior incluye los gastos o daños asociados a fallas de comunicación y/o fallas de funcionamiento de computadoras, vinculados con la utilización de la Herramienta Digital.
+[LICENCIA MIT](https://github.com/EL-BID/Plantilla-de-repositorio/blob/master/LICENSE.md)
