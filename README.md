@@ -1,19 +1,31 @@
 ## Leyes Abiertas
 
+![Header](/header-doc.png)
+
 ---
 
-### Nombre
+## Índice
+
+* [1. Nombre del proyecto](#1-nombre-del-proyecto)
+* [2. Descripción y contexto](#2-descripción-y-contexto)
+* [3. Guía de usuario](#3-guía-de-usuario)
+* [4. Guía de instalación](#4-guía-de-instalación)
+* [5. Autor](#5-Autor)
+* [6. Imagen del proyecto final](#6-imagen-del-proyecto-final)
+
+***
+
+
+## 1. Nombre del proyecto
 
 - Español: Leyes Abiertas
 - Inglés: Open Laws
 
-### Descripción y contexto
-
----
+## 2. Descripción y contexto
 
 **Leyes Abiertas** es una plataforma digital de elaboración colaborativa de normas que vincula a diputados/as con la ciudadanía. Su principal funcionalidad está destinada a mejorar los proyectos de ley a partir de aportes ciudadanos, respondiendo a los usos y costumbres de la Cámara de Diputados.
 
-_1. Objetivos Principales:_
+### 2.1. Objetivos Principales:
 
 La plataforma fue creada para cubrir dos aspectos muy importantes:
 
@@ -21,14 +33,12 @@ La plataforma fue creada para cubrir dos aspectos muy importantes:
 
 - Mejorar el contenido de las leyes, permitiendo profesionalizar el estudio de los proyectos de ley con esta instancia de revisión por parte de especialistas en las diversas temáticas e incorporar la perspectiva de personas y organizaciones involucradas y con experiencia en dichas temáticas.
 
-_2. Objetivos Secundarios_
+### 2.2. Objetivos Secundarios
 
 - Exhibición de los proyectos.
 - Involucramiento de la ciudadanía en el armado de las leyes aumentando sus capacidades cívicas.
 
-### Guía de usuario
-
----
+## 3. Guía de usuario
 
 La herramienta pone el foco en la visualización de anteproyectos de ley de forma directa, con descripciones sencillas y vídeos claros sobre su contenido. Cada uno cuenta con dos espacios de participación: un módulo de comentarios generales y otro de aportes sobre el articulado. Los/as diputados/as tienen sus cuentas verificadas, pueden responder de forma directa los comentarios y crear diferentes versiones del anteproyecto incorporando los aportes ciudadanos.
 
@@ -42,13 +52,13 @@ Los diputados analizarán los aportes. En la medida en se realicen cambios a la 
 
 Para más detalles sobre las funcionalidades básicas de esta plataforma descargue/consulte el[ Manual de usuario](https://leyesabiertas.hcdn.gob.ar/static/files/congreso_manual_de_usuario.pdf)
 
-### Guía de instalación
+## 4. Guía de instalación
 
-Hay dos formas de instalar leyes abiertas: Una es de forma clasica, descargando, haciendo setup y corriendo cada uno de los 3 repositorios en una terminal x/ repositorio.
+Hay dos formas de instalar leyes abiertas: Una es de forma clásica, descargando, haciendo setup y corriendo cada uno de los 3 repositorios en una terminal x/ repositorio.
 
-La segunda forma es utilizando Docker y `docker-compose`. En solo un paso se instala y conectan todos. Si queres, podes explorar mas acerca de esta instalacion bajo el titulo "Instalacion (Docker)"
+La segunda forma es utilizando Docker y `docker-compose`. En solo un paso se instala y conectan todos. Si queres, podes explorar más acerca de esta instalación bajo el título "Instalación (Docker)"
 
-#### Instalacion (Clasica)
+### 4.1 Instalación (Clásica)
 
 > ⚠️ _IMPORTANTE:_ Es necesario que instales mongo 3.6 en tu computadora, con una base de datos llamada "leyesabiertas". No hace falta crear alguna collection, eso lo hace la app en inicio.
 > La instalacion requiere de instalar 3 repositorios, como minimo.
@@ -63,7 +73,7 @@ dev/:$ git clone https://github.com/DemocraciaEnRed/leyesabiertas-notifier
 
 Una vez hecho, hay que hacer un "Setup" de cada una de los repositorios que acabamos de clonar.
 
-### Setup leyesabiertas-web
+**Setup leyesabiertas-web**
 
 Ir a la carpeta del repo y instalar las dependencias.
 
@@ -90,7 +100,7 @@ Comando para ejecutar:
 dev/leyesabiertas-web:$ npm run dev
 ```
 
-### Setup leyesabiertas-core
+**Setup leyesabiertas-core**
 
 Ir a la carpeta del repo y instalar las dependencias.
 
@@ -117,7 +127,7 @@ Comando para ejecutar:
 dev/leyesabiertas-core:$ npm run dev
 ```
 
-### Setup leyesabiertas-notifier
+**Setup leyesabiertas-notifier**
 
 Ir a la carpeta del repo y instalar las dependencias.
 
@@ -151,7 +161,7 @@ Comando para ejecutar:
 dev/leyesabiertas-notifier:$ npm run dev
 ```
 
-### Instalacion Docker
+### 4.2 Instalacion Docker
 
 ```yml
 version: "3"
@@ -229,60 +239,14 @@ $ docker-compose rm
 $ docker-compose down
 ```
 
-### Dependencias
-
-- Librerias
-
-        "dotenv": "^6.2.0",
-        "get-selection-range": "^0.1.0",
-        "immutable": "^3.8.2",
-        "isomorphic-unfetch": "^2.1.1",
-        "jimp": "^0.5.6",
-        "jump.js": "^1.0.2",
-        "keycloak-js": "4.4.0",
-        "next": "^6.1.2",
-        "react": "^16.8.6",
-        "react-datepicker": "^2.7.0",
-        "react-dom": "^16.8.6",
-        "react-file-base64": "^1.0.3",
-        "react-icons-kit": "^1.3.1",
-        "react-masonry-component": "^6.2.1",
-        "react-onclickoutside": "^6.8.0",
-        "react-router": "^4.3.1",
-        "react-router-dom": "^4.3.1",
-        "slate": "0.43.0",
-        "slate-react": "0.20.1",
-        "styled-components": "^3.4.10",
-        "video.js": "^7.6.5"
-
-### Cómo contribuir
-
----
-
-Esta sección explica a desarrolladores cuáles son las maneras habituales de enviar una solicitud de adhesión de nuevo código (“pull requests”), cómo declarar fallos en la herramienta y qué guías de estilo se deben usar al escribir más líneas de código. También puedes hacer un listado de puntos que se pueden mejorar de tu código para crear ideas de mejora.
-
-### Código de conducta
-
----
-
-El código de conducta establece las normas sociales, reglas y responsabilidades que los individuos y organizaciones deben seguir al interactuar de alguna manera con la herramienta digital o su comunidad. Es una buena práctica para crear un ambiente de respeto e inclusión en las contribuciones al proyecto.
-
-La plataforma Github premia y ayuda a los repositorios dispongan de este archivo. Al crear CODE_OF_CONDUCT.md puedes empezar desde una plantilla sugerida por ellos. Puedes leer más sobre cómo crear un archivo de Código de Conducta [aquí](https://help.github.com/articles/adding-a-code-of-conduct-to-your-project/)
-
-### Autor
-
----
+## 5. Autor
 
 Fundación Democracia en Red.
 
-### Información adicional
+## 6. Versión
 
----
+La información referente a la versión de leyes abiertas puedes encontrarla [aquí](https://github.com/DemocraciaEnRed/leyesabiertas-web/releases)
 
-Esta es la sección que permite agregar más información de contexto al proyecto como alguna web de relevancia, proyectos similares o que hayan usado la misma tecnología.
+## 7. Licencia
 
-### Licencia
-
----
-
-[LICENCIA MIT](https://github.com/irenemonzon/readme/blob/master/LICENSE.md)
+La licencia es MIT, puedes encontrarla en el siguiente enlace [LICENSE.MD](https://github.com/irenemonzon/readme/blob/master/LICENSE.md)
