@@ -250,4 +250,4 @@ La información referente a la versión de leyes abiertas puedes encontrarla [aq
 
 ## 7. Licencia
 
-La licencia es MIT, puedes encontrarla en el siguiente enlace [LICENSE.MD](https://github.com/irenemonzon/readme/blob/master/LICENSE.md)
+La licencia es GNU, puedes encontrarla en el siguiente enlace [LICENSE.MD](https://github.com/DemocraciaEnRed/leyesabiertas-web/blob/master/LICENSE)
