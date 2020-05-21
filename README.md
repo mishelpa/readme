@@ -40,7 +40,7 @@ A través de esta plataforma, la ciudadanía puede hacer comentarios generales, 
 
 Los diputados analizarán los aportes. En la medida en se realicen cambios a la propuesta original se generarán nuevas versiones de la propuesta. Así, las y los usuarios cuyos aportes fueran incorporados, serán colaboradores en la redacción de la propuesta.
 
-Para más detalles sobre las funcionalidades básicas de esta plataforma descargue/consulte el Manual de usuario[https://leyesabiertas.hcdn.gob.ar/static/files/congreso_manual_de_usuario.pdf]
+Para más detalles sobre las funcionalidades básicas de esta plataforma descargue/consulte el[ Manual de usuario](https://leyesabiertas.hcdn.gob.ar/static/files/congreso_manual_de_usuario.pdf)
 
 ### Guía de instalación
 
@@ -267,7 +267,7 @@ Esta sección explica a desarrolladores cuáles son las maneras habituales de en
 
 El código de conducta establece las normas sociales, reglas y responsabilidades que los individuos y organizaciones deben seguir al interactuar de alguna manera con la herramienta digital o su comunidad. Es una buena práctica para crear un ambiente de respeto e inclusión en las contribuciones al proyecto.
 
-La plataforma Github premia y ayuda a los repositorios dispongan de este archivo. Al crear CODE_OF_CONDUCT.md puedes empezar desde una plantilla sugerida por ellos. Puedes leer más sobre cómo crear un archivo de Código de Conducta (aquí)[https://help.github.com/articles/adding-a-code-of-conduct-to-your-project/]
+La plataforma Github premia y ayuda a los repositorios dispongan de este archivo. Al crear CODE_OF_CONDUCT.md puedes empezar desde una plantilla sugerida por ellos. Puedes leer más sobre cómo crear un archivo de Código de Conducta [aquí](https://help.github.com/articles/adding-a-code-of-conduct-to-your-project/)
 
 ### Autor
 
@@ -285,4 +285,4 @@ Esta es la sección que permite agregar más información de contexto al proyect
 
 ---
 
-[LICENCIA MIT](https://github.com/EL-BID/Plantilla-de-repositorio/blob/master/LICENSE.md)
+[LICENCIA MIT](https://github.com/irenemonzon/readme/blob/master/LICENSE.md)
